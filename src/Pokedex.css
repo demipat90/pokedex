@@ -1,44 +1,32 @@
-html {
-  font-family: sans-serif;
-  font-size: 10px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-body, div, p {
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+body {
+  height: 100%;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
   font-size: 1.6rem;
+  line-height: 1.5;
+  background-color: #ff000c;
 }
 a {
   color: #fff;
   text-decoration: none;
 }
-header {
-  position: relative;
-  height: 300px;
-  background: #ff000c;
-  box-sizing: border-box;
-  border-top: 1rem solid #ff000c;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-svg {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 15vw;
-}
-.panel {
-  padding: 3rem;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  display: flex;
-  position: absolute;
-}
+
 .led::after,
 .led::before {
   content: "";
   position: absolute;
 }
 .led::before{
-  height: 6px;
-  width: 16px;
+  height: 1vh;
+  width: 2vh;
   background: #ffffff80;
   border-radius: 100% 100% 70% 70%;
   left: 50%;
@@ -46,17 +34,17 @@ svg {
   top: 2px;
 }
 .led::after{
-  height: 5px;
-  width: 5px;
+  height: 1vh;
+  width: 1vh;
   background: #ffffff;
-  border-radius: 5px;
-  bottom: 1px;
+  border-radius: 50%;
+  bottom: 2px;
   left: 50%;
   transform: translate(-50%);
 }
 .led.indicator::before{
-  height: 30px;
-  width: 64px;
+  height: 2vh;
+  width: 4vh;
   background: #ffffff45;
   border-radius: 100% 100% 70% 70%;
   left: 50%;
@@ -64,17 +52,17 @@ svg {
   top: 4px;
 }
 .led.indicator::after{
-  height: 10px;
-  width: 10px;
+  height: 2vh;
+  width: 2vh;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 50%;
   bottom: 4px;
   left: 50%;
   transform: translate(-50%);
 }
 .led {
-  height: 4rem;
-  width: 4rem;
+  height: 6vh;
+  width: 6vh;
   margin-right: 2rem;
   border-radius: 50%;
   box-sizing: border-box;
@@ -82,43 +70,65 @@ svg {
   position: relative;
 }
 .led.indicator {
-  height: 15rem;
-  width: 15rem;
+  height: 13vh;
+  width: 13vh;
   background-color: #00a9dc;
-  border: 1rem solid #fff;
+  border: 1.5vh solid #fff;
+}
+.panel {
+  padding: 1vh;
+  display: flex;
+  position: absolute;
 }
 .panel-top {
-  padding: 1rem 2rem;
+  padding: 2.5vh;
 }
 .panel-top .led:nth-child(1) {
   background: #f0f;
-  border: 0.2rem solid #ea03e0;
+  border: 0.5vh solid #ea03e0;
 }
 .panel-top .led:nth-child(2) {
   background: #ff0;
-  border: 0.2rem solid #e6e600;
+  border: 0.5vh solid #e6e600;
 }
 .panel-top .led:nth-child(3) {
   background: #0f0;
-  border: 0.2rem solid #00ea00;
+  border: 0.5vh solid #00ea00;
 }
-.pokeapp{
-  padding : 1.6rem;
+#root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pokedex {
+  width: 98%;
+  max-width: max(50vw, 30rem);
+  height: 95vh;
+  padding: 1.5rem;
   background: #ff000c;
   box-sizing: border-box;
-  border-left: 1.5rem solid #a50004;
-  border-right: 1.5rem solid #a50004;
-  border-bottom: 1.5rem solid #a50004;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border: 1.5rem solid #a50004;
+  border-radius: 2.5rem 5rem;
+  box-shadow: 0.4rem 0.5rem 2rem 0.2rem rgb(0 0 0 / 50%);
 }
-.pokemon--species--list{
-  display : -webkit-box;
-  display : -ms-flexbox;
-  display : flex;
-  -ms-flex-wrap : wrap;
-  flex-wrap : wrap;
-  padding : 16px 0;
+
+.pokedex__header {
+  position: relative;
+  height: 15vh;
+}
+
+.pokemon--species--list {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: flex-start;
+  height: 75vh;
+  overflow-x: scroll;
+}
+.pokemon--species--list::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
 .pokemon--species{
   -ms-flex-preferred-size : 25%;
