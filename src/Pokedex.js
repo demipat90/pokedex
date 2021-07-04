@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import './Pokedex.css';
 import Header from './Components/layouts/Header';
-import PokemonList from './Components/PokemonList';
-import PokemonDetails from './Components/PokemonDetails';
+import PokemonList from './Components/pokemon/PokemonList';
+import PokemonDetails from './Components/pokemon/PokemonDetails';
 
 class Pokedex extends Component {
   state = {
     species : [],
-    data: {},
+    details: {},
     loading : false
   }
 
@@ -20,16 +20,16 @@ class Pokedex extends Component {
     this.setState({ species: res.data.results, loading: false});
   }
 
-  // search All pokemons
+  // search pokemon details
   getPokemon = async (id) => {
     this.setState({ loading: true});
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
     console.log(res.data, typeof res.data);
-    this.setState({ data: res.data, loading: false});
+    this.setState({ details: res.data, loading: false});
   }
 
   render() {
-    const { data, species, loading} = this.state;
+    const { details, species, loading} = this.state;
     return (
       <Router>
         <div className="pokedex">
@@ -47,7 +47,7 @@ class Pokedex extends Component {
               <PokemonDetails
                 { ...props }
                 getPokemon={this.getPokemon}
-                data={data}
+                details={details}
                 loading={loading}
               />
             )}/>
