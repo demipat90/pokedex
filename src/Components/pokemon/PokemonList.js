@@ -1,22 +1,22 @@
-import React, {Component} from 'react';
-import Pokemon from './Pokemon';
+import { useEffect } from 'react';
+import { Pokemon } from './Pokemon';
 
-class PokemonList extends Component {
+export const PokemonList = ({ searchAllPokemons, species }) => {
 
-  componentDidMount() {
-    this.props.searchAllPokemons();
-  }
+  useEffect(() => {
+    searchAllPokemons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  render() {
-    const { species } = this.props;
-    return (
-      <div className="pokemon--species--list">
-        { species.map( pokemon => (
-          <Pokemon key={pokemon.name} id={pokemon.url.replace('https://pokeapi.co/api/v2/pokemon/','').replace('/','')} pokemon={pokemon}/>
-        ))}
-      </div>
-    );
-  }
+  return (
+    <div className="pokemon--species--list">
+      {species?.map(pokemon => (
+        <Pokemon
+          key={pokemon.name}
+          id={pokemon.url.replace('https://pokeapi.co/api/v2/pokemon/', '').replace('/', '')}
+          pokemon={pokemon}
+        />
+      ))}
+    </div>
+  );
 }
-
-export default PokemonList;

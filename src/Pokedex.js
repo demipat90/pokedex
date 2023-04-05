@@ -1,61 +1,54 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { api, v2 } from './api';
+import { Header } from './components/layouts/Header';
+import { PokemonList } from './components/pokemon/PokemonList';
+import { PokemonDetails } from './components/pokemon/PokemonDetails';
+
 import './Pokedex.css';
-import Header from './Components/layouts/Header';
-import PokemonList from './Components/pokemon/PokemonList';
-import PokemonDetails from './Components/pokemon/PokemonDetails';
 
-class Pokedex extends Component {
-  state = {
-    species : [],
-    details: {},
-    loading : false
+export const Pokedex = () => {
+  const [species, setSpecies] = useState([]);
+  const [details, setDetails] = useState({});
+
+  // get All pokemons
+  const searchAllPokemons = async () => {
+    await api.get(`/${v2}/pokemon/?limit=892`)
+      .then((res) => setSpecies(res.data.results))
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  // search All pokemons
-  searchAllPokemons = async () => {
-    this.setState({ loading: true});
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=892`);
-    this.setState({ species: res.data.results, loading: false});
+  // get pokemon details
+  const getPokemon = async (id) => {
+    await api.get(`/${v2}/pokemon/${id}`)
+      .then((res) => setDetails(res.data))
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  // search pokemon details
-  getPokemon = async (id) => {
-    this.setState({ loading: true});
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    console.log(res.data, typeof res.data);
-    this.setState({ details: res.data, loading: false});
-  }
-
-  render() {
-    const { details, species, loading} = this.state;
-    return (
-      <Router>
-        <div className="pokedex">
-          <Header />
-          <Switch>
-            <Route exact path="/" render={ props => (
-              <PokemonList
-                { ...props }
-                searchAllPokemons={this.searchAllPokemons}
-                species={species}
-                loading={loading}
-              />
-            )}/>
-            <Route exact path="/pokemon/:id" render={ props => (
-              <PokemonDetails
-                { ...props }
-                getPokemon={this.getPokemon}
-                details={details}
-                loading={loading}
-              />
-            )}/>
-          </Switch>
-        </div>
-      </Router>
-    )
-  }
+  return (
+    <BrowserRouter>
+      <div className="pokedex">
+        <Header />
+        <Routes>
+          <Route exact path="/" element={
+            <PokemonList
+              searchAllPokemons={searchAllPokemons}
+              species={species}
+            />
+          } />
+          <Route exact path="/pokemon/:id" element={
+            <PokemonDetails
+              getPokemon={getPokemon}
+              details={details}
+            />
+          } />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
-
-export default Pokedex;

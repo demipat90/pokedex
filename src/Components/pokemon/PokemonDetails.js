@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
+import { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-class PokemonDetails extends Component {
+export const PokemonDetails = ({ getPokemon, details }) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  componentDidMount() {
-    this.props.getPokemon(this.props.match.params.id);
-  }
+  useEffect(() => {
+    getPokemon(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  render() {
-    const { name, abilities, types, sprites } = this.props.details;
-    return (
-      <div>
-        {name}
-        { (abilities) && (
-          <>
+  const { name, abilities, types, sprites } = details;
+
+  return (
+    <div>
+      <button onClick={() => navigate(-1)}>Back</button>
+      {name}
+      {(abilities) && (
+        <>
           {abilities.map(item => {
             return (
               <div key={item.slot}>{item.ability.name}</div>
             )
           })}
-          </>
-        )}
-        { (types) && (
-          <>
+        </>
+      )}
+      {(types) && (
+        <>
           {types.map(item => {
             return (
               <div key={item.slot}>{item.type.name}</div>
             )
           })}
-          </>
-        )}
-        { (sprites) && (
-          <>
-            <img src={sprites.back_default} alt="back sprite" />
-            <img src={sprites.front_default} alt="front sprite" />
-          </>
-        )}
-      </div>
-    )
-  }
+        </>
+      )}
+      {(sprites) && (
+        <>
+          <img src={sprites.back_default} alt="back sprite" />
+          <img src={sprites.front_default} alt="front sprite" />
+        </>
+      )}
+    </div>
+  )
 }
-
-export default PokemonDetails;

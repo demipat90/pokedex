@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Header = () => {
+export const Header = () => {
   return (
     <div className="pokedex__header">
       <div className="panel">
@@ -14,5 +12,3 @@ const Header = () => {
     </div>
   )
 }
-
-export default Header;

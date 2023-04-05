@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Pokedex from './Pokedex';
+import * as ReactDOMClient from 'react-dom/client';
+import { Pokedex } from './Pokedex';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Pokedex />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const container = document.getElementById('root');
+
+const root = ReactDOMClient.createRoot(container);
+
+root.render(<Pokedex />);
