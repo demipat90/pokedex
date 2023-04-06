@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-export const PokemonDetails = ({ getPokemon, details }) => {
+import { useGetPokemon } from '../../api';
+
+export const PokemonDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getPokemon(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const { isLoading, data: details = {} } = useGetPokemon(id);
+
+  if (isLoading) return (<div>Loading...</div>);
 
   const { name, abilities, types, sprites } = details;
 
