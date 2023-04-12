@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Outlet, Link } from 'react-router-dom';
 
 import { useGetPokemon } from '../../api';
 
@@ -10,36 +10,26 @@ export const PokemonDetails = () => {
 
   if (isLoading) return (<div>Loading...</div>);
 
-  const { name, abilities, types, sprites } = details;
+  const { name, height, weight, abilities, types, sprites } = details;
 
   return (
     <div>
-      <button onClick={() => navigate(-1)}>Back</button>
-      {name}
-      {(abilities) && (
-        <>
-          {abilities.map(item => {
-            return (
-              <div key={item.slot}>{item.ability.name}</div>
-            )
-          })}
-        </>
-      )}
-      {(types) && (
-        <>
-          {types.map(item => {
-            return (
-              <div key={item.slot}>{item.type.name}</div>
-            )
-          })}
-        </>
-      )}
-      {(sprites) && (
-        <>
-          <img src={sprites.back_default} alt="back sprite" />
-          <img src={sprites.front_default} alt="front sprite" />
-        </>
-      )}
+      <div><button onClick={() => navigate("/")}>Back</button></div>
+      <hr />
+      <h2>Name: {name}</h2>
+      <h5>Height: {height}</h5>
+      <h5>Weight: {weight}</h5>
+      <img src={sprites.other["official-artwork"].front_default} alt="image"/>
+      <hr />
+      <nav>
+        <ul>
+          <li><Link to="images">Images</Link></li>
+          <li><Link to="abilities">Abilities</Link></li>
+          <li><Link to="types">Types</Link></li>
+        </ul>
+      </nav>
+      <hr />
+      <Outlet context={{ sprites, abilities, types }} />
     </div>
   )
 }
