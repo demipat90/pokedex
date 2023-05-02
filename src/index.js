@@ -6,6 +6,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { queryClient } from './config/react-query';
 import { Pokedex } from './Pokedex';
 
+import './index.css';
+
 const container = document.getElementById('root');
 
 const root = ReactDOMClient.createRoot(container);
