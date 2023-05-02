@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+  font-family: 'pokemon_gbregular';
+  src: url('./fonts/pokemongb-webfont.woff2') format('woff2'),
+       url('./fonts/pokemongb-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: "pokemon_gbregular";
+  font-size: 1.6rem;
+  line-height: 1.5;
+}

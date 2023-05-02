@@ -1,4 +1,4 @@
-import { QueryClient, useQuery, useMutation } from '@tanstack/react-query';
+import { QueryClient, useQuery, useMutation, useInfiniteQuery } from '@tanstack/react-query';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,6 +19,18 @@ export const useQueryWrapper = (
     queryKey,
     queryFn,
     select: transformResponse,
+    ...options,
+  }
+);
+
+export const useInfiniteQueryWrapper = (
+  queryKey,
+  queryFn,
+  options = {}
+) => useInfiniteQuery(
+  {
+    queryKey,
+    queryFn,
     ...options,
   }
 );

@@ -14,15 +14,21 @@ export const Pokedex = () => {
   return (
     <BrowserRouter>
       <div className="pokedex">
-        <Header />
-        <Routes>
-          <Route exact path="/" element={<PokemonList />} />
-          <Route exact path="/pokemon/:id" element={<PokemonDetails />}>
-            <Route path="images" element={<Images />} />
-            <Route path="abilities" element={<Abilities />} />
-            <Route path="types" element={<Types />} />
-          </Route>
-        </Routes>
+        <div className="pokedex__header">
+          <Header />
+        </div>
+        <div className="pokedex__content">
+          <div className="pokedex__content__wrapper">
+            <Routes>
+              <Route exact path="/" element={<PokemonList />} />
+              <Route exact path="/pokemon/:id" element={<PokemonDetails />}>
+                <Route path="images" element={<Images />} />
+                <Route path="abilities" element={<Abilities />} />
+                <Route path="types" element={<Types />} />
+              </Route>
+            </Routes>
+          </div>
+        </div>
       </div>
     </BrowserRouter>
   );

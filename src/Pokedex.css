@@ -1,146 +1,147 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html {
-  font-size: 62.5%;
-  height: 100%;
-}
-body {
-  height: 100%;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-  font-size: 1.6rem;
-  line-height: 1.5;
-  background-color: #ff000c;
-}
-a {
-  color: #fff;
-  text-decoration: none;
-}
-
 .led::after,
 .led::before {
   content: "";
   position: absolute;
 }
+
 .led::before{
-  height: 1vh;
-  width: 2vh;
+  height: 0.6rem;
+  width: 1.2rem;
   background: #ffffff80;
   border-radius: 100% 100% 70% 70%;
   left: 50%;
   transform: translate(-50%);
-  top: 2px;
+  top: 0.3rem;
 }
+
 .led::after{
-  height: 1vh;
-  width: 1vh;
+  height: 0.6rem;
+  width: 0.6rem;
   background: #ffffff;
   border-radius: 50%;
-  bottom: 2px;
+  bottom: 0.3rem;
   left: 50%;
   transform: translate(-50%);
 }
+
 .led.indicator::before{
-  height: 2vh;
-  width: 4vh;
+  height: 1rem;
+  width: 2rem;
   background: #ffffff45;
   border-radius: 100% 100% 70% 70%;
   left: 50%;
   transform: translate(-50%);
-  top: 4px;
+  top: 0.5rem;
 }
+
 .led.indicator::after{
-  height: 2vh;
-  width: 2vh;
+  height: 1rem;
+  width: 1rem;
   background: #fff;
   border-radius: 50%;
-  bottom: 4px;
+  bottom: 0.5rem;
   left: 50%;
   transform: translate(-50%);
 }
+
 .led {
-  height: 6vh;
-  width: 6vh;
-  margin-right: 2rem;
+  height: 3.6rem;
+  width: 3.6rem;
+  margin-left: 1rem;
   border-radius: 50%;
   box-sizing: border-box;
   display: inline-block;
   position: relative;
 }
+
 .led.indicator {
-  height: 13vh;
-  width: 13vh;
+  height: 7rem;
+  width: 7rem;
   background-color: #00a9dc;
-  border: 1.5vh solid #fff;
+  border: .5rem solid #fff;
 }
+
 .panel {
-  padding: 1vh;
+  padding: 1rem;
   display: flex;
-  position: absolute;
-}
-.panel-top {
-  padding: 2.5vh;
-}
-.panel-top .led:nth-child(1) {
-  background: #f0f;
-  border: 0.5vh solid #ea03e0;
-}
-.panel-top .led:nth-child(2) {
-  background: #ff0;
-  border: 0.5vh solid #e6e600;
-}
-.panel-top .led:nth-child(3) {
-  background: #0f0;
-  border: 0.5vh solid #00ea00;
-}
-#root {
-  height: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
 }
-.pokedex {
-  width: 98%;
-  max-width: max(50vw, 30rem);
-  height: 95vh;
-  padding: 1.5rem;
-  background: #ff000c;
-  box-sizing: border-box;
-  border: 1.5rem solid #a50004;
-  border-radius: 2.5rem 5rem;
-  box-shadow: 0.4rem 0.5rem 2rem 0.2rem rgb(0 0 0 / 50%);
+
+.panel-top .led:nth-child(1) {
+  background: #f0f;
+  border: 0.2rem solid #ea03e0;
+}
+
+.panel-top .led:nth-child(2) {
+  background: #ff0;
+  border: 0.2rem solid #e6e600;
+}
+
+.panel-top .led:nth-child(3) {
+  background: #0f0;
+  border: 0.2rem solid #00ea00;
 }
 
 .pokedex__header {
-  position: relative;
-  height: 15vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  width: calc(100% - 2rem);
+  height: 10rem;
+  background: #ff000c;
+  border-bottom: 1rem solid #a50004;
+  border-radius: 2rem 5rem;
+  box-shadow: 0.4rem 0.5rem 2rem 0.2rem rgb(0 0 0 / 50%);
 }
 
-.pokemon--species--list {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: flex-start;
-  height: 75vh;
-  overflow-x: scroll;
+.pokedex__content {
+  padding: 12rem 1rem 1rem;
 }
+
+.pokedex__content__wrapper {
+  padding: 2rem;
+  border: 0.5rem solid #ff000c;
+  border-radius: 2rem 5rem;
+  height: calc(100vh - 13rem);
+}
+
+.pokedex__content__wrapper::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+
+.pokemon--species--list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  gap: 2rem;
+  height: calc(100vh - 21rem);
+  overflow-y: auto;
+}
+
 .pokemon--species--list::-webkit-scrollbar {
   width: 0;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
 }
-.pokemon--species{
-  -ms-flex-preferred-size : 25%;
-  flex-basis : 25%;
-  padding : 8px;
-  box-sizing: border-box;
 
-}
-.pokemon--species--container{
-  padding : 8px;
+.pokemon--species--container {
+  padding : 1rem;
   background : #363636;
-  border-radius: 5px;
+  border-radius: 1.5rem 3rem;
   text-align: center;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.pokemon--species--sprite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokemon--species--name {
+  color: white;
 }
