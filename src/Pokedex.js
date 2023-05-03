@@ -19,6 +19,7 @@ export const Pokedex = () => {
         </div>
         <div className="pokedex__content">
           <div className="pokedex__content__wrapper">
+            <img className="pokedex__bg" src="./images/ball.png" alt="pokeball" />
             <Routes>
               <Route exact path="/" element={<PokemonList />} />
               <Route exact path="/pokemon/:id" element={<PokemonDetails />}>

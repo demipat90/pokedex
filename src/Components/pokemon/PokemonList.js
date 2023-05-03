@@ -4,7 +4,7 @@ import { Pokemon } from './Pokemon';
 
 export const PokemonList = () => {
 
-  const { isLoading, data: { pages = [] } = {}, fetchNextPage, isFetching, isFetchingNextPage } = useGetAllPokemons();
+  const { isLoading, data: { pages = [] } = {}, fetchNextPage, isFetching, hasNextPage } = useGetAllPokemons();
 
   if (isLoading) return (<div>Loading...</div>);
 
@@ -25,17 +25,18 @@ export const PokemonList = () => {
           })
         }
       </div>
-      <div className="flex justify-center">
-        <button
-          onClick={fetchNextPage}
-          className="rounded-md bg-red-950 px-3 py-2 text-white hover:bg-red-500"
-        >
-          Load More
-        </button>
-        {
-          isFetching && !isFetchingNextPage ? "Fetching..." : null
-        }
-      </div>
+      {hasNextPage && (
+        <div className="flex justify-center p-8">
+          <button
+            onClick={fetchNextPage}
+            className="rounded-md bg-red-950 px-3 py-2 text-white hover:bg-red-500"
+          >
+            {
+              isFetching ? "Fetching..." : "Load More"
+            }
+          </button>
+        </div>
+      )}
     </>
   );
 }

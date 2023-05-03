@@ -2,7 +2,7 @@ import { api, v2 } from '../config/axios';
 import { useQueryWrapper, useInfiniteQueryWrapper } from '../config/react-query';
 
 const pokeApi = {
-  getAllPokemons: ({pageParam = 0}) => {
+  getAllPokemons: ({ pageParam = 0 }) => {
     return api.get(`/${v2}/pokemon/?limit=12&offset=${pageParam}`)
   },
   getPokemon: (payload) => api.get(`/${v2}/pokemon/${payload}`)
@@ -13,9 +13,13 @@ export const useGetAllPokemons = () => useInfiniteQueryWrapper(
   [pokemonList],
   pokeApi.getAllPokemons,
   {
-    getNextPageParam: (lastPage, _pages) => {
-      if(lastPage.data.next) {
-        return lastPage.data.next.replace("https://pokeapi.co/api/v2/pokemon/?offset=", "").replace("&limit=12", "")
+    getNextPageParam: (_lastPage, pages) => {
+      const offset = pages[pages.length - 1].data.next ?
+        pages[pages.length - 1].data.next.replace("https://pokeapi.co/api/v2/pokemon/?offset=", "").replace("&limit=12", "")
+        :
+        null;
+      if (offset) {
+        return offset
       } else {
         return undefined
       }

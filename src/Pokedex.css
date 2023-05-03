@@ -107,6 +107,18 @@
   border: 0.5rem solid #ff000c;
   border-radius: 2rem 5rem;
   height: calc(100vh - 13rem);
+  overflow: hidden;
+  position: relative;
+  background-color: #ff000c;
+  box-shadow: 0.4rem 0.5rem 2rem 0.2rem rgb(0 0 0 / 50%);
+}
+
+.pokedex__bg {
+  position: absolute;
+  width: 50vw;
+  bottom: -20vw;
+  right: -20vw;
+  mix-blend-mode: multiply;
 }
 
 .pokedex__content__wrapper::-webkit-scrollbar {
@@ -119,8 +131,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   gap: 2rem;
-  height: calc(100vh - 21rem);
+  height: calc(100vh - 24rem);
   overflow-y: auto;
+  z-index: 1;
+  position: relative;
 }
 
 .pokemon--species--list::-webkit-scrollbar {
@@ -129,6 +143,8 @@
 }
 
 .pokemon--species--container {
+  display: block;
+  height: 100%;
   padding : 1rem;
   background : #363636;
   border-radius: 1.5rem 3rem;
