@@ -4,6 +4,16 @@ import { useGetPokemon } from '../../api';
 import { zeroPadNumber } from "../../utils/text-formatter";
 import { Types } from "./Types";
 
+const traversePokemon = (id, dir) => {
+  if(dir === "next") {
+    return id === 1010 ? "/pokemon/1": `/pokemon/${id + 1}`;
+  } else if (dir === "prev") {
+    return id === 1 ? "/pokemon/1010" : `/pokemon/${id - 1}`;
+  } else {
+    return "/";
+  }
+}
+
 export const PokemonDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,8 +28,11 @@ export const PokemonDetails = () => {
 
   return (
     <div>
-      <div><button onClick={() => navigate(-1)}>Back</button></div>
-      <div className="flex flex-col md:flex-row items-stretch gap-8">
+      <div className="flex justify-between">
+        <button onClick={() => navigate(traversePokemon(PokeId, "prev"))}>Prev</button>
+        <button onClick={() => navigate(traversePokemon(PokeId, "next"))}>Next</button>
+      </div>
+      <div className="flex flex-col md:flex-row items-stretch gap-8 h-[calc(100vh_-_20rem)] overflow-y-auto">
         <div className="basis-2/4">
           <div className="text-4xl mb-8">n {zeroPadNumber(PokeId, 4)}</div>
           <div className="flex justify-between items-start mb-8">

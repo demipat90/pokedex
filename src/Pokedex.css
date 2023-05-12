@@ -121,12 +121,6 @@
   mix-blend-mode: multiply;
 }
 
-.pokedex__content__wrapper::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
-}
-
-
 .pokemon--species--list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
@@ -135,11 +129,6 @@
   overflow-y: auto;
   z-index: 1;
   position: relative;
-}
-
-.pokemon--species--list::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
 }
 
 .pokemon--species--container {
