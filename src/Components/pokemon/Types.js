@@ -1,20 +1,12 @@
-import { useOutletContext } from "react-router-dom";
-
-export const Types = () => {
-  const { types } = useOutletContext();
-
-  return (
-    <>
-      <div>Types</div>
-      {(types) && (
-        <>
-          {types.map(item => {
-            return (
-              <div key={item.slot}>{item.type.name}</div>
-            )
-          })}
-        </>
-      )}
-    </>
-  )
+export const Types = ({ types }) => {
+  return types && types?.map(item => {
+    return (
+      <div
+        key={item.slot}
+        className={`flex justify-center items-center px-4 py-2 capitalize rounded background-color-${item.type.name}`}
+      >
+        {item.type.name}
+      </div>
+    )
+  })
 }

@@ -2,10 +2,9 @@ import { api, v2 } from '../config/axios';
 import { useQueryWrapper, useInfiniteQueryWrapper } from '../config/react-query';
 
 const pokeApi = {
-  getAllPokemons: ({ pageParam = 0 }) => {
-    return api.get(`/${v2}/pokemon/?limit=12&offset=${pageParam}`)
-  },
-  getPokemon: (payload) => api.get(`/${v2}/pokemon/${payload}`)
+  getAllPokemons: ({ pageParam = 0 }) => api.get(`/${v2}/pokemon/?limit=12&offset=${pageParam}`),
+  getPokemon: (payload) => api.get(`/${v2}/pokemon/${payload}`),
+  getPokemonSpecies: (payload) => api.get(`/${v2}/pokemon-species/${payload}`),
 };
 
 const pokemonList = 'pokemon-list';
@@ -31,4 +30,13 @@ const pokemonDetails = 'pokemon-details';
 export const useGetPokemon = (id) => useQueryWrapper(
   [pokemonDetails, id],
   () => pokeApi.getPokemon(id),
+);
+
+const pokemonSpecies = 'pokemon-species';
+export const useGetPokemonSpecies = (id) => useQueryWrapper(
+  [pokemonSpecies, id],
+  () => pokeApi.getPokemonSpecies(id),
+  {
+    enabled: !!id,
+  }
 );
