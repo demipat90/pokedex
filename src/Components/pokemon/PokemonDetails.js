@@ -1,12 +1,13 @@
 import { useParams, useNavigate, Outlet, NavLink } from 'react-router-dom';
 
-import { useGetPokemon } from '../../api';
+import { useGetPokemon, useGetPokemonSpecies } from '../../api';
 import { zeroPadNumber } from "../../utils/text-formatter";
+import { getPokemonSpeciesColorClass } from "../../utils/constants";
 import { Types } from "./Types";
 
 const traversePokemon = (id, dir) => {
-  if(dir === "next") {
-    return id === 1010 ? "/pokemon/1": `/pokemon/${id + 1}`;
+  if (dir === "next") {
+    return id === 1010 ? "/pokemon/1" : `/pokemon/${id + 1}`;
   } else if (dir === "prev") {
     return id === 1 ? "/pokemon/1010" : `/pokemon/${id - 1}`;
   } else {
@@ -20,9 +21,11 @@ export const PokemonDetails = () => {
 
   const { isLoading, data: details = {} } = useGetPokemon(id);
 
-  if (isLoading) return (<div>Loading...</div>);
+  const { id: PokeId, name, abilities, types, sprites, stats, species, weight, height } = details;
 
-  const { id: PokeId, name, abilities, types, sprites, stats, species } = details;
+  const { isLoading: isLoadingSpeciesData, data: { color, varieties, flavor_text_entries, capture_rate, egg_groups } = {} } = useGetPokemonSpecies(species?.name);
+
+  if (isLoading && isLoadingSpeciesData) return (<div>Loading...</div>);
 
   const navLinkClasses = ({ isActive }) => (isActive ? 'mx-4 px-3 py-2 rounded-md bg-red-950 text-white' : 'mx-4 px-3 py-2 rounded-md');
 
@@ -41,18 +44,19 @@ export const PokemonDetails = () => {
               <Types types={types} />
             </div>
           </div>
-          <div className="flex justify-center rounded-3xl background-glass">
+          <div className={`flex justify-center rounded-3xl background-glass ${getPokemonSpeciesColorClass[color?.name]} bg-opacity-90 border-opacity-95`}>
             <img src={sprites.other["official-artwork"].front_default} alt="avatar" />
           </div>
         </div>
         <div className="basis-2/4">
           <nav className="flex mb-4">
-            <NavLink to="forms" className={navLinkClasses}>Forms</NavLink>
-            <NavLink to="abilities" className={navLinkClasses}>Abilities</NavLink>
-            <NavLink to="stats" className={navLinkClasses}>Stats</NavLink>
+            <NavLink to="" className={navLinkClasses} end>Info</NavLink>
+            <NavLink to="forms" className={navLinkClasses} end>Forms</NavLink>
+            <NavLink to="abilities" className={navLinkClasses} end>Abilities</NavLink>
+            <NavLink to="stats" className={navLinkClasses} end>Stats</NavLink>
           </nav>
           <div className="mb-8">
-            <Outlet context={{ species, abilities, stats }} />
+            <Outlet context={{ species, abilities, stats, varieties, flavor_text_entries, weight, height, capture_rate, egg_groups }} />
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import { useOutletContext, Link } from "react-router-dom";
 
-import { useGetPokemonSpecies } from "../../api";
 import { defaultSpritePath } from "../../utils/constants";
 
 const getPokeId = (str) => {
@@ -8,10 +7,7 @@ const getPokeId = (str) => {
 }
 
 export const Forms = () => {
-  const { species } = useOutletContext();
-  const { isLoading, data: { varieties = [] } = {} } = useGetPokemonSpecies(species.name);
-
-  if (isLoading) return "Loading...";
+  const { varieties } = useOutletContext();
 
   return varieties?.map((variety, index) => {
     const pokeId = getPokeId(variety.pokemon.url);

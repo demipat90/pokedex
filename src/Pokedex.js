@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/layouts/Header';
 import { PokemonList } from './components/pokemon/PokemonList';
 import { PokemonDetails } from './components/pokemon/PokemonDetails';
+import { Info } from "./components/pokemon/Info";
 import { Forms } from './components/pokemon/Forms';
 import { Abilities } from './components/pokemon/Abilities';
 import { Stats } from './components/pokemon/Stats';
@@ -23,6 +24,7 @@ export const Pokedex = () => {
             <Routes>
               <Route exact path="/" element={<PokemonList />} />
               <Route exact path="/pokemon/:id" element={<PokemonDetails />}>
+                <Route index element={<Info />} />
                 <Route path="forms" element={<Forms />} />
                 <Route path="abilities" element={<Abilities />} />
                 <Route path="stats" element={<Stats />} />

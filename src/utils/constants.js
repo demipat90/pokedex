@@ -26,3 +26,16 @@ export const pokemonTypesColorSync = {
   "unknown": "#000",
   "shadow": "#000",
 };
+
+export const getPokemonSpeciesColorClass = {
+  "black": "bg-neutral-950 border-neutral-950",
+  "blue": "bg-blue-800 border-blue-800",
+  "brown": "bg-amber-950 border-amber-950",
+  "grey": "bg-gray-700 border-gray-700",
+  "green": "bg-green-500 border-green-500",
+  "pink": "bg-pink-700 border-pink-700",
+  "purple": "bg-purple-700 border-purple-700",
+  "red": "bg-red-700 border-red-700",
+  "white": "bg-neutral-100 border-neutral-100",
+  "yellow": "bg-yellow-500 border-yellow-500",
+}
