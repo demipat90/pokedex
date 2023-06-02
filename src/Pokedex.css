@@ -346,3 +346,22 @@
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
+.poke-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.poke-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a50004;
+  border-radius: 25px;
+}
+
+.poke-scrollbar::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 25px;
+}

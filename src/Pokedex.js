@@ -7,6 +7,7 @@ import { Info } from "./components/pokemon/Info";
 import { Forms } from './components/pokemon/Forms';
 import { Abilities } from './components/pokemon/Abilities';
 import { Stats } from './components/pokemon/Stats';
+import { Evolution } from './components/pokemon/Evolution';
 
 import './Pokedex.css';
 
@@ -28,6 +29,7 @@ export const Pokedex = () => {
                 <Route path="forms" element={<Forms />} />
                 <Route path="abilities" element={<Abilities />} />
                 <Route path="stats" element={<Stats />} />
+                <Route path="evolution" element={<Evolution />} />
               </Route>
             </Routes>
           </div>

@@ -23,11 +23,11 @@ export const PokemonDetails = () => {
 
   const { id: PokeId, name, abilities, types, sprites, stats, species, weight, height } = details;
 
-  const { isLoading: isLoadingSpeciesData, data: { color, varieties, flavor_text_entries, capture_rate, egg_groups } = {} } = useGetPokemonSpecies(species?.name);
+  const { isLoading: isLoadingSpeciesData, data: { color, varieties, flavor_text_entries, capture_rate, egg_groups, genera, evolution_chain } = {} } = useGetPokemonSpecies(species?.name);
 
   if (isLoading && isLoadingSpeciesData) return (<div>Loading...</div>);
 
-  const navLinkClasses = ({ isActive }) => (isActive ? 'mx-4 px-3 py-2 rounded-md bg-red-950 text-white' : 'mx-4 px-3 py-2 rounded-md');
+  const navLinkClasses = ({ isActive }) => (isActive ? 'mr-4 px-3 py-2 rounded-md bg-red-950 text-white' : 'mr-4 px-3 py-2 rounded-md');
 
   return (
     <div>
@@ -48,15 +48,16 @@ export const PokemonDetails = () => {
             <img src={sprites.other["official-artwork"].front_default} alt="avatar" />
           </div>
         </div>
-        <div className="basis-2/4">
-          <nav className="flex mb-4">
+        <div className="basis-2/4 md:overflow-x-hidden">
+          <nav className="flex mb-4 py-4 overflow-x-auto poke-scrollbar">
             <NavLink to="" className={navLinkClasses} end>Info</NavLink>
             <NavLink to="forms" className={navLinkClasses} end>Forms</NavLink>
             <NavLink to="abilities" className={navLinkClasses} end>Abilities</NavLink>
             <NavLink to="stats" className={navLinkClasses} end>Stats</NavLink>
+            <NavLink to="evolution" className={navLinkClasses} end>Evolution</NavLink>
           </nav>
           <div className="mb-8">
-            <Outlet context={{ species, abilities, stats, varieties, flavor_text_entries, weight, height, capture_rate, egg_groups }} />
+            <Outlet context={{ species, abilities, stats, varieties, flavor_text_entries, weight, height, capture_rate, egg_groups, genera, evolution_chain }} />
           </div>
         </div>
       </div>

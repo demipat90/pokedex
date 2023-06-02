@@ -1,30 +1,37 @@
 import { Fragment } from "react";
 import { useOutletContext } from "react-router-dom";
 
-export const Info = () => {
-  const { flavor_text_entries, weight, height, capture_rate, egg_groups } = useOutletContext();
+import { filterByLanguage, renderFlavorText } from "../../utils/text-formatter";
 
+const getRedFlavorEngText = (data) => {
+  const result = data?.filter(item => item.language.name === "en" && item.version.name === "red");
+  if (result?.length) return renderFlavorText(result[0].flavor_text);
+  return false;
+}
+
+const getCategoryName = (data) => {
+  const result = filterByLanguage(data, "en");
+  if (result?.length) return result[0].genus.replace("Pokémon", "").trim();
+  return false;
+}
+
+export const Info = () => {
+  const { flavor_text_entries, weight, height, capture_rate, egg_groups, genera } = useOutletContext();
+  const flavorText = getRedFlavorEngText(flavor_text_entries);
+  const categoryName = getCategoryName(genera);
   return (
     <>
-      {flavor_text_entries && (
-        <div className="flex items-center gap-8 background-glass rounded-lg p-5 mb-8">
-          <h3 className="text-white">{flavor_text_entries[0].flavor_text}</h3>
-          <p className="capitalize">{flavor_text_entries[0].version.name}</p>
-        </div>
-      )}
-      {egg_groups && (
-        <div className="flex items-center gap-8 background-glass rounded-lg p-5 mb-8">
-          <h3 className="text-white capitalize"> Egg Groups:
-            {
-              egg_groups?.map((item, index) => (<Fragment key={index}> {item.name}</Fragment>))
-            }
+      <div className="background-glass rounded-lg p-5 mb-8">
+        {flavorText && (<h3 className="text-white mb-8">{flavorText}</h3>)}
+        {categoryName && (<h3 className="text-white mb-8">Category: {categoryName}</h3>)}
+        {egg_groups && (
+          <h3 className="text-white capitalize mb-8"> Egg Groups:
+            { egg_groups?.map((item, index) => (<Fragment key={index}> {item.name}</Fragment>)) }
           </h3>
-        </div>
-      )}
-      <div className="flex flex-col items-start gap-8 background-glass rounded-lg p-5 mb-8">
-        <h3 className="text-white">Weight: {weight / 10} kg</h3>
-        <h3 className="text-white">Height: {height / 10} m</h3>
-        <h3 className="text-white">Capture Rate: {capture_rate}</h3>
+        )}
+        {weight && (<h3 className="text-white mb-8">Weight: {weight / 10} kg</h3>)}
+        {height && (<h3 className="text-white mb-8">Height: {height / 10} m</h3>)}
+        {capture_rate && (<h3 className="text-white mb-8">Capture Rate: {capture_rate}</h3>)}
       </div>
     </>
   )
